@@ -15,25 +15,84 @@
 
         <!-- CSS File -->
         <link rel="stylesheet" href="css/style.css">
+
+        <!-- Alpine.js -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        
+        <!-- Apps -->
+        <script src="/js/app.js" async></script>
     </head>
     <body>
         
         <!-- Navbar Start -->
-        <nav class="navbar">
+        <nav class="navbar" x-data>
             <a href="#" class="navbar-logo">Kedai<span>kopi</span></a>
             <div class="navbar-nav">
                 <a href="#home">Home</a>
                 <a href="#about">Tentang Kami</a>
                 <a href="#menuSection">Menu</a>
+                <a href="#product">Product</a>
                 <a href="#contact">Contact</a>
 
             </div>
             <div class="navbar-extract">
-                <a href="#" id="search"><i data-feather="search"></i></a>
-                <a href="#" id="shopping-cart"><i data-feather="shopping-bag"></i></a>
-                <a href="#" id="menu"><i data-feather="menu"></i></a>
-                                
+                <a href="#" id="search-btn"><i data-feather="search"></i></a>
+                <a href="#" id="shopping-cart-btn" @click.prevent>
+                    <i data-feather="shopping-bag"></i>
+                    <span class="quantity-notif" x-show="$store.shop.quantity" x-text="$store.shop.quantity"></span>
+                </a>
+                <a href="#" id="menu"><i data-feather="menu"></i></a>       
             </div>
+
+            <!-- Search Form Start -->
+            <div class="search-form">
+                <input type="search" id="search-box" placeholder="search here...">
+                <label for="search-box"><i data-feather="search"></i></label>
+            </div>
+            <!-- Search Form End -->
+
+            <!-- Shopping Cart Start -->
+            <div class="shopping-cart">
+                <template x-for="(item, index) in $store.shop.items" x-key="index">
+                    <div class="cart-item">
+                        <img :src="`img/${item.img}`" :alt="item.name">
+                        <div class="detail-item">
+                            <h3 x-text="item.name"></h3>
+                            <div class="item-price">
+                                <span x-text="kurs(item.price)"></span> &times;
+                                <button id="remove" @click="$store.shop.remove(item.id)">&minus;</button>
+                                <span x-text="item.quantity"></span>
+                                <button id="add" @click="$store.shop.add(item)">&plus;</button>
+                                <span x-text="kurs(item.total)"></span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <h4 x-show="!$store.shop.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
+                <h4 x-show="$store.shop.items.length">Total Belanja : <span x-text="kurs($store.shop.total)"></span></h4>
+                <div class="form-container" x-show="$store.shop.items.length">
+                    <form action="" id="checkout-form">
+                        <input type="hidden" name="items" x-model="JSON.stringify($store.shop.items)">
+                        <input type="hidden" name="total" x-model="JSON.stringify($store.shop.total)">
+                        <h5>Customer Detail</h5>
+                        <label for="name">
+                            <span>Name</span>
+                            <input type="text" name="name" id="name" placeholder="Masukkan Nama Anda" required>
+                        </label>
+                        <label for="email">
+                            <span>Email</span>
+                            <input type="text" name="email" id="email" placeholder="Masukkan Email Anda" required>
+                        </label>
+                        <label for="phone">
+                            <span>Phone</span>
+                            <input type="text" name="phone" id="phone" autocomplete="off" placeholder="Masukkan WhatsApp Anda" required>
+                        </label>
+                        <button class="checkout-btn disable" type="submit" id="checkout-btn" value="chechout">Pesan</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Shopping Cart End -->
+
         </nav>
         <!-- Navbar End -->
 
@@ -53,7 +112,7 @@
 
             <div class="row">
                 <div class="about-img">
-                    <img src="/img/img2.jpg" alt="Tentang Kami">
+                    <img src="img/img2.jpg" alt="Tentang Kami">
                 </div>
                 <div class="content">
                     <h3>Kenapa memilih kopi kami?</h3>
@@ -74,27 +133,27 @@
             
             <div class="row">
                 <div class="menu-card">
-                    <img src="/img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="/img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="/img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="/img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="/img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
@@ -102,9 +161,52 @@
         </section>
         <!-- Menu Section End -->
 
+        <!-- Produk Section Start -->
+        <section class="product" id="product" x-data="product">
+            <h2><span>Produk</span> Unggulan Kami</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Beatae molestias fugit amet animi labore sapiente?</p>
+            <div class="row">
+                <template x-for="(item, index) in items" x-key="index">
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <a href="#" @click.prevent="$store.shop.add(item)">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" 
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <use href="img/feather-sprite.svg#shopping-cart"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="item-detail-btn">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" 
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <use href="img/feather-sprite.svg#eye"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="product-img">
+                            <img :src="`img/${item.img}`" :alt="item.name">
+                        </div>
+                        <div class="product-content">
+                            <h3 x-text="item.name"></h3>
+                            <div class="product-star">
+                                <i data-feather="star" class="star-fill"></i>
+                                <i data-feather="star" class="star-fill"></i>
+                                <i data-feather="star" class="star-fill"></i>
+                                <i data-feather="star" class="star-fill"></i>
+                                <i data-feather="star"></i>
+                            </div>
+                            <div class="product-price"><span x-text="kurs(item.price)"></span></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <!-- Produk Section End -->
+
         <!-- Contact Section Start -->
         <section id="contact" class="contact">
-            <h2><span>Kontak</span> Kami</h2>
+            <h2>Kontak <span>Kami</span></h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, voluptatum!</p>
 
             <div class="row">
@@ -148,6 +250,32 @@
             </div>
         </footer>
         <!-- Footer End -->
+
+        <!-- Modal Box Item Detail Start-->
+        <div class="modal" id="item-detail-modal">
+            <div class="modal-container">
+                <a href="#"><i data-feather="x-circle" class="close-btn"></i></a>
+                <div class="modal-content">
+                    <img src="img/produk2.jpg" alt="Coffee Powder">
+                    <div class="product-content">
+                        <h3>Coffee Powder</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Distinctio sunt sapiente repellat vel nisi consequuntur cupiditate quaerat assumenda non. 
+                            Ipsum ipsa architecto obcaecati perspiciatis facilis.</p>
+                        <div class="product-star">
+                            <i data-feather="star" class="star-fill"></i>
+                            <i data-feather="star" class="star-fill"></i>
+                            <i data-feather="star" class="star-fill"></i>
+                            <i data-feather="star" class="star-fill"></i>
+                            <i data-feather="star"></i>
+                        </div>
+                        <div class="product-price">Rp.25.000-, <span>Rp.35.000-,</span></div>
+                        <a href="#"><i data-feather="shopping-cart"></i><span>add to cart</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Box Item Detail End -->
 
         <!-- Icon  -->
         <script>
