@@ -251,7 +251,7 @@ body{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url(img/img1.jpg);
+    background-image: url(../img/img1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
