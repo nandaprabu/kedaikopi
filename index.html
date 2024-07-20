@@ -55,7 +55,7 @@
             <div class="shopping-cart">
                 <template x-for="(item, index) in $store.shop.items" x-key="index">
                     <div class="cart-item">
-                        <img :src="`img/${item.img}`" :alt="item.name">
+                        <img :src="`./img/${item.img}`" :alt="item.name">
                         <div class="detail-item">
                             <h3 x-text="item.name"></h3>
                             <div class="item-price">
@@ -112,7 +112,7 @@
 
             <div class="row">
                 <div class="about-img">
-                    <img src="img/img2.jpg" alt="Tentang Kami">
+                    <img src="./img/img2.jpg" alt="Tentang Kami">
                 </div>
                 <div class="content">
                     <h3>Kenapa memilih kopi kami?</h3>
@@ -133,27 +133,27 @@
             
             <div class="row">
                 <div class="menu-card">
-                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="./img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="./img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="./img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="./img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
                 <div class="menu-card">
-                    <img src="img/produk1.jpg" alt="Kopi" class="menu-card-image">
+                    <img src="./img/produk1.jpg" alt="Kopi" class="menu-card-image">
                     <h3 class="menu-card-title">Ekspresso</h3>
                     <p class="menu-card-price">Rp. 15.000-,</p>
                 </div>
@@ -173,18 +173,18 @@
                             <a href="#" @click.prevent="$store.shop.add(item)">
                                 <svg width="24" height="24" fill="none" stroke="currentColor" 
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <use href="img/feather-sprite.svg#shopping-cart"/>
+                                    <use href="./img/feather-sprite.svg#shopping-cart"/>
                                 </svg>
                             </a>
                             <a href="#" class="item-detail-btn">
                                 <svg width="24" height="24" fill="none" stroke="currentColor" 
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <use href="img/feather-sprite.svg#eye"/>
+                                    <use href="./img/feather-sprite.svg#eye"/>
                                 </svg>
                             </a>
                         </div>
                         <div class="product-img">
-                            <img :src="`img/${item.img}`" :alt="item.name">
+                            <img :src="`./img/${item.img}`" :alt="item.name">
                         </div>
                         <div class="product-content">
                             <h3 x-text="item.name"></h3>
@@ -256,7 +256,7 @@
             <div class="modal-container">
                 <a href="#"><i data-feather="x-circle" class="close-btn"></i></a>
                 <div class="modal-content">
-                    <img src="img/produk2.jpg" alt="Coffee Powder">
+                    <img src="./img/produk2.jpg" alt="Coffee Powder">
                     <div class="product-content">
                         <h3>Coffee Powder</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
